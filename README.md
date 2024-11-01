@@ -1,4 +1,4 @@
-# GitHub Copilot Metrics - Dashboard
+# DVT GitHub Copilot Metrics - Dashboard
 
 1. [Introduction](#introduction)
 2. [Deploy to Azure](#deploy-to-azure)
@@ -27,6 +27,30 @@ Ability to filter metrics by date range, languages, code editors and visualise d
 **Code Editors:** Breakdown of code editors which can be used to filter the data.
 
 # Deploy to Azure
+
+## DVT-specific setup
+
+You need access to the `Developer tooling prod-001` subscription in Azure. To do this, log into Azure with your adm account, navigate to [`Privileged Identity Management > My roles > Groups`](https://portal.azure.com/#view/Microsoft_Azure_PIMCommon/ActivationMenuBlade/~/aadgroup) and activate the `az-sub-Developer Tooling-prod-001-owner` group for the time you need.
+
+Run:
+
+```sh
+azd auth login
+# choose your adm account in the browser window that pops up
+azd init
+# set environment name = dvt-copilot-dashboard
+azd up
+# choose
+#   subscription = Developer Tooling- prod- 001 subscription
+#   location = (Europe) West Europe (westeurope)
+#   githubAPIScope = organization
+#   githubEnterpriseName = tv2
+#   githubOrganisationName = tv2
+```
+
+We haven't figured out how to attach to the existing secrets :shrug:
+
+## General setup
 
 The solution accelerator is a web application that uses Azure App Service, Azure Functions, Azure Cosmos DB, Azure Storage and Azure Key Vault. The deployment template will automatically populate the required environment variables in Azure Key Vault and configure the application settings in Azure App Service and Azure Functions.
 ![GitHub Copilot Metrics - Architecture ](/docs/CopilotDashboard.png "GitHub Copilot Metrics - Architecture")
